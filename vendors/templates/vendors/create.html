@@ -1,0 +1,17 @@
+<!-- ./employee/templates/employee/create.html -->
+
+{% extends 'layout.html' %}
+
+    <title>Create</title>
+
+{% block content %}
+    <title>Create</title>
+
+    <h1 style="text-align: center; padding-top: 1em; padding-bottom: 1em;">Add New Vendor Information</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success">
+    </form>
+{% endblock content %}
