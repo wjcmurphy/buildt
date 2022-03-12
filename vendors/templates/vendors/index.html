@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="px-4 py-5 my-5 text-center">
+  <i class="bi bi-patch-question"></i>
+    <h1 class="display-5 fw-bold">Vendor Developer Network</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Let your devs work anywhere!</b></p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Vendor Profile</button>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Vendor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'vendors:create' %}" method="post">
+        {% csrf_token %}
+          <div class="form-group">
+            <label for="title">Name</label><br>
+            <input type="text" name="title" id="question-title" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label><br>
+            <textarea name="body" id="question-body" class="form-control"></textarea>
+          </div>
+          <p>TODO: more fields!</p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" value="Save" class="btn btn-primary">
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} <div class="list-group list-group-flush ">
+  {% for question in questions %}
+    <a href="{% url 'questions:detail' question.id %}" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ question.title}}</h5>
+        <small>{{question.created_at|naturaltime }}</small>
+      </div>
+      <span class="badge bg-primary rounded-pill float-right">14 Comments</span>
+      <p class="mb-1">{{question.body|slice:":50"}}</p>
+      <small>Tags to go here</small>
+    </a>
+  {% endfor %}
+</div> {% endcomment %}
+
+{% endblock %} #}
