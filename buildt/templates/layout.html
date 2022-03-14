@@ -19,19 +19,20 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" href="/">Vendor List</a>
+          <a class="nav-link active" href={% url 'vendors:create' %}>Create Vendor</a>
           <a class="nav-link active" href="/">Developers</a>
           <a class="nav-link active" href="/">Open for Work</a>
           <a class="nav-link active" href="/">Search</a>          
         </div>
       </div>
         <ul class="nav navbar-nav navbar-right">
-          {% comment %} {% if user.is_authenticated %}
-            <li><a class="nav-link" href="{% url 'users:profile' %}">{{ user.username }}</a></li>
-            <li><a class="nav-link" href="{% url 'users:logout' %}">Logout</a></li>
+          {% if user.is_authenticated %}
+            <li><a class="nav-link" href="/">{{ user.username }}</a></li>
+            <li><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
           {% else %}
-            <li><a class="nav-link" href="{% url 'users:login' %}">Login</a></li>
-            <li><a class="nav-link" href="{% url 'users:signup' %}">Signup</a></li>
-          {% endif %} {% endcomment %}
+            <li><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a></li>
+          {% endif %}
         </ul>
     </div>
   </nav>
