@@ -36,6 +36,7 @@ LOGIN_REDIRECT_URL = '/accounts/profile'
 INSTALLED_APPS = [
     'vendors',
     'accounts',
+    'resources',
 
     'django.contrib.admin',
     'django.contrib.auth',
