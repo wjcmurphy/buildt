@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h3>Vendor List</h3>
+
+{% for vendor in vendors %}
+    <li>
+        <a href="{% url 'vendors:detail' vendor.id %}">{{ vendor.business_name}}</a>
+    </li>
+{% endfor %}
+
+{% endblock %}

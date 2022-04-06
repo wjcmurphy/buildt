@@ -11,7 +11,7 @@ class Resource(models.Model):
     first_name = models.CharField(max_length=400)    
     last_name = models.CharField(max_length=400)
     title = models.CharField(max_length=400)
-    vendor_id = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)
 
@@ -29,21 +29,21 @@ class SkillLevel(models.Model):
 
 class ResourceSkills(models.Model):
     # ResourceSkills fields here
-    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
-    skill_id = models.ForeignKey(Skill, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)
 
 class ResourceSkillLevel(models.Model):
     # ResourceSkills fields here
-    resource_skill_id = models.ForeignKey(ResourceSkills, on_delete=models.CASCADE)
-    skill_level_id = models.ForeignKey(SkillLevel, on_delete=models.CASCADE)
+    resource_skill = models.ForeignKey(ResourceSkills, on_delete=models.CASCADE)
+    skill_level = models.ForeignKey(SkillLevel, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)
 
 class ResourceAvailability(models.Model):
     # ResourceAvailability fields here
-    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     hours_per_day = models.FloatField()
@@ -52,14 +52,14 @@ class ResourceAvailability(models.Model):
 
 class ResourceCost(models.Model):
     # ResourceCost fields here
-    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     cost_per_hour = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)
 
 class ResourceTimeZone(models.Model):
     # ResourceTimeZone fields here
-    resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     resource_time_zone = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)

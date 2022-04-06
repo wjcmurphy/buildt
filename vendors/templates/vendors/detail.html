@@ -2,6 +2,18 @@
 
 {% block content %}
 
-<h1>DETAILLS</h1>
+<h1>{{vendor.business_name}}</h1>
+
+<a href="{% url 'vendors:resources:create' vendor.id %}" 
+
+<ul class="list-group">
+    <li class="list-group-item">{{ vendor.last_name }}</li>
+    <li class="list-group-item">{{ vendor.first_name }}</li>
+    <li class="list-group-item">{{ vendor.business_website }}</li>
+    <li class="list-group-item">{{ vendor.description }}</li>
+    <li class="list-group-item">{{ vendor.city }}</li>
+    <li class="list-group-item">{{ vendor.state }}</li>
+    <li class="list-group-item">{{ vendor.country }}</li>
+</ul>
 
 {% endblock %}
