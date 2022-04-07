@@ -14,7 +14,7 @@ def list(request):
     vendors = Vendor.objects.all()
     return render(request, 'vendors/list.html', {'vendors': vendors})
 
-def create(request, vendor_id):
+def create(request):
     form = VendorForm()
 
     if request.method == 'POST':
