@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from .models import Vendor
 from .forms import VendorForm
 
@@ -14,7 +15,7 @@ def list(request):
     vendors = Vendor.objects.all()
     return render(request, 'vendors/list.html', {'vendors': vendors})
 
-def create(request, vendor_id):
+def create(request):
     form = VendorForm()
 
     if request.method == 'POST':
@@ -27,4 +28,3 @@ def create(request, vendor_id):
         'form': form,
     }
     return render(request, 'vendors/create.html', context)
-

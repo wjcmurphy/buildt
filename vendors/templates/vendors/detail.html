@@ -4,7 +4,9 @@
 
 <h1>{{vendor.business_name}}</h1>
 
-<a href="{% url 'vendors:resources:create' vendor.id %}" 
+<a href="{% url 'vendors:resources:create' vendor.id %}">Create Resource</a> 
+
+<h3>Vendor Information</h3>
 
 <ul class="list-group">
     <li class="list-group-item">{{ vendor.last_name }}</li>
@@ -14,6 +16,19 @@
     <li class="list-group-item">{{ vendor.city }}</li>
     <li class="list-group-item">{{ vendor.state }}</li>
     <li class="list-group-item">{{ vendor.country }}</li>
+</ul>
+
+<h3>Resources</h3>
+
+
+<ul class="list-group">
+    {% for resource in vendor.resource_set.all %}
+    <li class="list-group-item"> 
+        {{ resource.title }}
+        {{ resource.first_name }}
+        {{ resource.last_name }}
+    </li>
+    {% endfor %}
 </ul>
 
 {% endblock %}

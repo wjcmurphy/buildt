@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 from .models import Resource, Vendor
 from .forms import ResourceForm
 
@@ -7,8 +8,9 @@ from .forms import ResourceForm
 def index(request):
     return render(request, 'resources/index.html')
 
-def detail(request, resource_id):
-    context = {resource_id: resource_id}
+def detail(request, resource_id, vendor_id):
+    resource = Resource.objects.get(pk=resource_id)
+    context = {'resource': resource}
     return render(request, 'resources/detail.html', context)
 
 def create(request, vendor_id):
@@ -20,7 +22,7 @@ def create(request, vendor_id):
         if form.is_valid():
             form.instance.vendor = vendor
             form.save()
-            return redirect('../')
+            return redirect('vendors:detail', vendor_id=vendor_id)
 
     context = {
         'form': form,
@@ -29,3 +31,14 @@ def create(request, vendor_id):
 
 def edit(request):
     return render(request, 'resources/edit.html')
+
+def search(request):
+   return render(request, "resources/search.html")  
+
+def search_results(request):
+    results = Resource.objects.filter(
+        Q(first_name__contains=request.GET['q']) | 
+        Q(last_name__contains=request.GET['q'] ) |
+        Q(title__contains=request.GET['q'] ) 
+    )
+    return render(request, "resources/search_results.html", {'results': results})   
