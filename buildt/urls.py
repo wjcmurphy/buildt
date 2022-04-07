@@ -22,11 +22,9 @@ import vendors.views
 app_name = 'buildt'
 
 urlpatterns = [
-    path('', vendors.views.index, name="index"),
     path('vendors/', include('vendors.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('resources/', include('resources.urls'))
 
     # path('accounts/profile/', name='profile'),
 ]

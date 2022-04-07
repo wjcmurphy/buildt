@@ -1,20 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import Vendor
 from .forms import VendorForm
 
-# Site index, this should change
+# Create your views here.
 def index(request):    
     return render(request, 'vendors/index.html')
 
-def detail(request, vendor_id):
-    vendor = get_object_or_404(Vendor, pk=vendor_id)
-    return render(request, "vendors/detail.html", {'vendor': vendor}) 
-
-def list(request):
-    vendors = Vendor.objects.all()
-    return render(request, 'vendors/list.html', {'vendors': vendors})
-
-def create(request, vendor_id):
+def create(request):
     form = VendorForm()
 
     if request.method == 'POST':
@@ -28,3 +20,5 @@ def create(request, vendor_id):
     }
     return render(request, 'vendors/create.html', context)
 
+def detail(request):
+    return render(request, "vendors/detail.html") 
