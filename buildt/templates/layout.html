@@ -20,6 +20,8 @@
         <div class="navbar-nav">
           <a class="nav-link active" href="{% url 'vendors:list' %}">Vendor List</a>
           <a class="nav-link active" href={% url 'vendors:create' %}>Create Vendor</a>
+          {% comment %} <a class="nav-link active" href="{% url 'vendors:resources:create' vendor.id %}">Create Resource</a> {% endcomment %}
+          {% comment %} <a href="{% url 'vendors:resources:create' vendor.id %}">Create Resource</a>  {% endcomment %}
           {% comment %} <a class="nav-link active" href="/">Developers</a> {% endcomment %}
           {% comment %} <a class="nav-link active" href="/">Open for Work</a> {% endcomment %}
           <a class="nav-link active" href="{% url 'search' %}">Search</a>          
