@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.decorators import login_required
 
-import vendors.views, resources.views
+import vendors.views, resources.views 
 
 app_name = 'buildt'
 
 urlpatterns = [
-    path('', vendors.views.index, name="index"),
+    path('', include('pages.urls')),
     path('vendors/', include('vendors.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
