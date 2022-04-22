@@ -28,3 +28,6 @@ def create(request):
         'form': form,
     }
     return render(request, 'vendors/create.html', context)
+
+def clicked(request):
+    return render(request, 'vendors/partials/clicked.html')

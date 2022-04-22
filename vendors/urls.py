@@ -9,4 +9,5 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('<int:vendor_id>', views.detail, name='detail'),
     path('<int:vendor_id>/resources/', include('resources.urls', namespace='resources')),
+    path('clicked', views.clicked, name="clicked")
 ]

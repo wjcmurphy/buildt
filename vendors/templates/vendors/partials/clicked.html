@@ -1,0 +1,6 @@
+<button type="button" class="btn btn-primary" hx-post="/vendors/clicked"
+hx-trigger="click"
+hx-target="this"
+hx-swap="outerHTML">
+Sent by server! clicked on {% now "jS F Y H:i:s" %} by {{ user.username }}
+</button>

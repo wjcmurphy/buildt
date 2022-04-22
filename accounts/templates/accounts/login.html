@@ -1,4 +1,4 @@
-{% extends 'portal_layout.html' %}
+{% extends 'landing_layout.html' %}
 {% block content %}
 
   {% if form.errors %}
@@ -14,7 +14,34 @@
     {% endif %}
   {% endif %}
 
-  <form method="post" action="{% url 'accounts:login' %}">
+  <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    {% if form.errors %}
+        {{form.errors}}
+    {% endif %}
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Login</h1>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5">
+        {{ form.non_field_errors }}
+        <form method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-floating mb-3">
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name}}" class="form-control" id="{{ field.id_for_label }}">
+            <label for="{{ field.id_for_label }}">{{ field.label}}</label>
+          </div> 
+
+          {% endfor %}
+     
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+          <hr class="my-4">
+          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+        </form>
+      </div>
+    </div>
+
+  {% comment %} <form method="post" action="{% url 'accounts:login' %}">
     {% csrf_token %}
     <table>
       <tr>
@@ -28,7 +55,7 @@
     </table>
     <input type="submit" value="login" />
     <input type="hidden" name="next" value="{{ next }}" />
-  </form>
+  </form> {% endcomment %}
 
   {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'accounts:password_reset' %}">Lost password?</a></p>
