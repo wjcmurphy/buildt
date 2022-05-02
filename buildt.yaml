@@ -1,0 +1,31 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+envs:
+- key: DJANGO_ALLOWED_HOSTS
+  scope: RUN_AND_BUILD_TIME
+  value: ${APP_DOMAIN}
+- key: DEBUG
+  scope: RUN_AND_BUILD_TIME
+  value: "True"
+- key: DJANGO_SECRET_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:/wHtsDY43/WnrPFht/sOKhLzRLfMRoUd:8YkndQnIQrCpLMlwFkxn8yGhPZmPe8+ewGU9t3faC7wUH1vun80Fec5rSk+MnJnL]
+name: buildt
+region: nyc
+services:
+- environment_slug: python
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: wjcmurphy/buildt
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: buildt
+  routes:
+  - path: /
+  - path: /static
+  run_command: gunicorn --worker-tmp-dir /dev/shm buildt.wsgi
+  source_dir: /
