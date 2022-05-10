@@ -1,15 +1,53 @@
 {% extends 'portal_layout.html' %}
 {% block content %}
 
-<h3 class="display-5 fw-bold">viewing resource {{ resource.title }}</h3>
-<p>
-{{ resource.first_name }}
-{{ resource.last_name }}
-</p>
+<img src="https://picsum.photos/200" class="rounded-circle">
 
-<p>
+<h5 class="display-5 fw-bold">
+    {{ resource.first_name }}
+    {{ resource.last_name }}
+</h5>
 
-    skill list to go here...
-</p>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ resource.title }} </li>
+    <li class="list-group-item">${{ resource.cost_per_hour }} per hour </li>
+</ul>
+
+<h6>Skills</h6>
+<ul class="list-group list-group-flush">
+    {%for skill in resource.skills.all %}
+    <li class="list-group-item">
+        {{skill}}
+    </li>        
+    {%endfor %}
+</ul>
+
+
+<h6>Availability</h6>
+
+<ul class="list-group list-group-flush">
+    {%for a in resource.availability_set.all %}
+    <li class="list-group-item">
+        <b>Availability Block</b>
+        Start: {{a.start_date|date:'Y-m-d'}}
+        End: {{a.end_date|date:'Y-m-d'}} 
+    </br>
+        <form method="post" action="book">
+            {% csrf_token %}
+            <label for="start">Book:</label>
+            <input type="date" id="start" name="trip-start" 
+                value={{a.start_date|date:'Y-m-d'}} 
+                min={{a.start_date|date:'Y-m-d'}} 
+                max={{a.end_date|date:'Y-m-d'}} >
+            <button class="btn btn-primary" type="submit">Book</button>
+        </form>
+
+    </li>        
+    {%endfor %}
+</ul>
+
+
+
+
 
 {% endblock %} #}

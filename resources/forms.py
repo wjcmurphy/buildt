@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Resource, Skill
+from .models import Resource, Skill, Booking
 
 class ResourceForm(ModelForm):
     class Meta:
@@ -14,3 +14,14 @@ class ResourceForm(ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),                 
             'cost_per_hour': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cost Per Hour'}),            
         }
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Booking
+        fields = ('start_date', 'end_date', 'hours_per_day')
+        widgets = {
+            'start_date': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'hours_per_day': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Hours Per Day'}),            
+        }
+    

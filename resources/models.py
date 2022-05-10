@@ -16,14 +16,6 @@ class Skill(models.Model):
     def __str__(self):
         return self.skill_name
 
-class Availability(models.Model):
-    # ResourceAvailability fields here
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    hours_per_day = models.FloatField()
-    created_at = models.DateTimeField(auto_now_add=True, blank=True)
-    updated_at = models.DateTimeField(auto_now=True, blank=True)
-
 class Resource(models.Model):
     # Resource fields here
     first_name = models.CharField(max_length=400)
@@ -31,11 +23,28 @@ class Resource(models.Model):
     title = models.CharField(max_length=400)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     skills = models.ManyToManyField(Skill)
-    availability = models.ManyToManyField(Availability)
     time_zone = models.CharField(max_length=25, default='cst')
     cost_per_hour = models.FloatField(default=10)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)
+
+class Availability(models.Model):
+    # ResourceAvailability fields here
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    hours_per_day = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+
+# these look similar, so maybe creating a single model like Bookings which is inverse of availability that can handle all cases...
+class Booking(models.Model):
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    hours_per_day = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
 
 # class SkillLevel(models.Model):
 #     # Skill fields here

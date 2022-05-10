@@ -1,17 +1,31 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from .models import Resource, Vendor
-from .forms import ResourceForm
+from .forms import ResourceForm, BookingForm
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'resources/index.html')
+    resources = Resource.objects.all()
+    context = {'resources': resources}
+    return render(request, 'resources/index.html', context)
 
-def detail(request, resource_id, vendor_id):
+def detail(request, resource_id):
     resource = Resource.objects.get(pk=resource_id)
     context = {'resource': resource}
     return render(request, 'resources/detail.html', context)
+
+def book(request, resource_id):
+    resource = Resource.objects.get(pk=resource_id)
+    booking = BookingForm(request.POST)
+    if booking.is_valid():
+        booking.instance.resource = resource
+        booking.save()
+        return redirect('resources:detail', resource_id=resource.id)
+    context = {
+        'form': booking
+    }
+    return render(request, 'resources/detail.html', context)    
 
 def create(request, vendor_id):
     form = ResourceForm()

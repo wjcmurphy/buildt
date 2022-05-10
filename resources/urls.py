@@ -7,5 +7,6 @@ urlpatterns = [
     path("", views.index, name='index'),
     path('<int:resource_id>/', views.detail, name='detail'),
     path('create', views.create, name='create'),
-    path('edit', views.edit, name='edit')
+    path('edit', views.edit, name='edit'),
+    path('<int:resource_id>/book', views.book, name='book')
 ]    
